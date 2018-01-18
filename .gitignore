@@ -27,3 +27,6 @@ pip-log.txt
 
 # pypi readme
 README.rst
+
+#macos
+.gitignore
