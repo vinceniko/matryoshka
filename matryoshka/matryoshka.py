@@ -34,14 +34,12 @@ def unpack_arrays(array, preserve_empties=True, types=[]):
     def recurse(array):
         for elem in array:
             if isinstance(elem, iter_types):
-                try:
-                    if len(elem) == 1 and isinstance(elem, str):  # conditions for str
-                        array_unpacked.append(elem)
-                    else:  # conditions for iters that are not strings
-                        recurse(elem)
-                except TypeError:  # not an iter
-                    if preserve_empties:
-                        array_unpacked.append(elem)
+                if len(elem) == 1 and isinstance(elem, str):  # conditions for str
+                    array_unpacked.append(elem)
+                elif preserve_empties and len(elem) == 0:
+                    array_unpacked.append(elem)
+                else:  # conditions for iters that are not strings
+                    recurse(elem)
             else:
                 array_unpacked.append(elem)
 
@@ -58,3 +56,4 @@ if __name__ == '__main__':
 
     print(unpack_arrays(array, types=[str]))
     print(unpack_arrays(array, False))
+    print(unpack_arrays(array))
