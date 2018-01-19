@@ -5,7 +5,7 @@ author: Vincent Nikolayev
 
 Overview
 --------
-Unpacks any array with nested-array type-containers into a single level.
+Unpacks any array with nested-array type-containers to a 1D array.
 
 Features
 --------
