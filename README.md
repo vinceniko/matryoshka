@@ -11,6 +11,7 @@ Features
 --------
 * Able to preserve empty containers at their indices
 * Able to preserve full strings or unpack them to single length strings ie. 'st' vs. ['s', 't']
+* Pass in additional iterable types
 * Implements recursion
 
 Requires
