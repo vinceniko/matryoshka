@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def unpack_arrays(array, preserve_empties=True, types=[]):
+def unpack(array, preserve_empties=True, types=[]):
     """
     Unpacks any array with nested-array type-containers into a single level array (*note: refer to preserve_empties array for the slight exception to this).
 
@@ -36,15 +36,15 @@ def unpack_arrays(array, preserve_empties=True, types=[]):
             if isinstance(elem, iter_types):
                 if len(elem) == 1 and isinstance(elem, str):  # conditions for str
                     array_unpacked.append(elem)
-                elif preserve_empties and len(elem) == 0:
+                elif preserve_empties and len(elem) == 0:  # an empty iterable
                     array_unpacked.append(elem)
-                else:  # conditions for iters that are not strings
+                else:  # conditions for iters that are not strings, continue looping
                     recurse(elem)
-            else:
+            else:  # not an iterable
                 array_unpacked.append(elem)
 
     ### MAIN ###
-    array_unpacked = []
+    array_unpacked = []  # holds unpacked elems
 
     recurse(array)
 
@@ -54,6 +54,6 @@ def unpack_arrays(array, preserve_empties=True, types=[]):
 if __name__ == '__main__':
     array = [[[1], 2], ([3], [[4]]), (), 'string']
 
-    print(unpack_arrays(array, types=[str]))
-    print(unpack_arrays(array, False))
-    print(unpack_arrays(array))
+    print(unpack(array))
+    print(unpack(array, False))
+    print(unpack(array, False, types=[str]))
